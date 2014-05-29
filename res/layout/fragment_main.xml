@@ -9,6 +9,7 @@
     tools:context="com.gimpel.journeytest.activity.MainActivity$PlaceholderFragment" >
 
     <Button
+        android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="goToList"

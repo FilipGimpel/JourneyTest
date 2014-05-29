@@ -2,18 +2,38 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="I LOVE TRAINSSSS"></TextView>
-    
-    <TextView
-        android:id="@+id/journey"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/title"></TextView>
-    
-    
 
+    <ImageView
+        android:id="@+id/imageview_transport_icon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="16dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/train" />
+
+    <TextView
+        android:id="@+id/textview_start_and_destination"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/imageview_transport_icon" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/textview_train_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textview_start_and_destination"
+        android:layout_toRightOf="@+id/imageview_transport_icon" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/textview_seat"
+		android:layout_toRightOf="@+id/imageview_transport_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textview_train_number"></TextView>
+    
+    
 </RelativeLayout>

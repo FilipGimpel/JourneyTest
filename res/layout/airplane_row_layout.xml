@@ -1,17 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="I LOVE AIRPLANES"></TextView>
-
-        <TextView
-        android:id="@+id/journey"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/title"></TextView>
+    android:layout_height="wrap_content" >
     
+    <ImageView
+        android:id="@+id/imageview_transport_icon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="16dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/airplane" />
+    
+    <TextView
+        android:id="@+id/textview_start_and_destination"
+        android:layout_toRightOf="@+id/imageview_transport_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
+
+    <TextView
+        android:id="@+id/textview_flight_number"
+		android:layout_toRightOf="@+id/imageview_transport_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textview_start_and_destination"></TextView>
+    
+    <TextView
+        android:id="@+id/textview_gate_number"
+		android:layout_toRightOf="@+id/imageview_transport_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textview_flight_number"></TextView>
+    
+    <TextView
+        android:id="@+id/textview_seat"
+		android:layout_toRightOf="@+id/imageview_transport_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textview_gate_number"></TextView>
+    
+    <TextView
+        android:id="@+id/textview_bagage_drop"
+		android:layout_toRightOf="@+id/imageview_transport_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textview_seat"></TextView>
 </RelativeLayout>

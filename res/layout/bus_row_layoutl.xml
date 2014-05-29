@@ -2,16 +2,30 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/imageview_transport_icon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginRight="16dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/bus" />
+
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/textview_start_and_destination"
+        android:layout_toRightOf="@+id/imageview_transport_icon"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="I LOVE BUSES!"></TextView>
+        android:layout_height="wrap_content">
+    </TextView>
     
-        <TextView
-        android:id="@+id/journey"
+    <TextView
+        android:id="@+id/textview_seat"
+		android:layout_toRightOf="@+id/imageview_transport_icon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/title"></TextView>
+        android:layout_below="@+id/textview_start_and_destination"></TextView>
+    
 
 </RelativeLayout>

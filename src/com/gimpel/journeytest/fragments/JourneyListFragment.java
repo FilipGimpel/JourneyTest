@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.gimpel.journeytest.R;
@@ -18,11 +18,15 @@ import com.gimpel.journeytest.boardingcards.AbstractBoardingCard;
 import com.gimpel.journeytest.boardingcards.AirplaneBoardingCard;
 import com.gimpel.journeytest.boardingcards.BusBoardingCard;
 import com.gimpel.journeytest.boardingcards.TrainBoardingCard;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 public class JourneyListFragment extends Fragment {
 	private List<AbstractBoardingCard> mBoardingCards;
 	private BoardingCardAdapter mAdapter;
-	private ListView mListView;
+	//private ListView mListView;
+	PullToRefreshListView mListView;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,19 +43,38 @@ public class JourneyListFragment extends Fragment {
 		mBoardingCards = getBoardingCards();
 		mAdapter = new BoardingCardAdapter(getActivity(), mBoardingCards);
 		
-        mListView = (ListView) view.findViewById(R.id.listview);
+        //mListView = (ListView) view.findViewById(R.id.listview);
+		mListView = (PullToRefreshListView) getView().findViewById(R.id.listview);
         mListView.setAdapter(mAdapter);
-        
-        Button b = (Button) view.findViewById(R.id.sortListButton);
-        b.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				sort();
-			}
-		});
+        mListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+                new FakeWaitTask().execute();
+            }
+        });
 	}
 
+	private class FakeWaitTask extends AsyncTask<Void, Void, String[]> {
+	    
+	    @Override
+	    protected void onPostExecute(String[] result) {
+	        mListView.onRefreshComplete();
+	        sort();
+	        super.onPostExecute(result);
+	    }
+
+		@Override
+		protected String[] doInBackground(Void... params) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+			return null;
+		}
+	}
+	
 	/**
 	 * Sorts data asociated with listview in a way described in task.
 	 * This method works only for correnct data.

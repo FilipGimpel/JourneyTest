@@ -25,6 +25,8 @@
             </intent-filter>
         </activity>
         <activity
+            android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar"
             android:name="com.gimpel.journeytest.activity.ListActivity"
             android:label="@string/title_activity_list" >
         </activity>
