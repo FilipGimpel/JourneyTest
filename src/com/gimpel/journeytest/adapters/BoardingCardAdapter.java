@@ -2,18 +2,16 @@ package com.gimpel.journeytest.adapters;
 
 import java.util.List;
 
-import com.gimpel.journeytest.R;
-import com.gimpel.journeytest.R.id;
-import com.gimpel.journeytest.R.layout;
-import com.gimpel.journeytest.boardingcards.AbstractBoardingCard;
-import com.gimpel.journeytest.boardingcards.AbstractBoardingCard.Transport;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.gimpel.journeytest.R;
+import com.gimpel.journeytest.boardingcards.AbstractBoardingCard;
+import com.gimpel.journeytest.boardingcards.AbstractBoardingCard.Transport;
 
 public class BoardingCardAdapter extends BaseAdapter {
 	private LayoutInflater mInflater;
@@ -29,7 +27,13 @@ public class BoardingCardAdapter extends BaseAdapter {
 	public int getItemViewType(int position) {
 		return mDataSet.get(position).getType().getId();
 	}
-
+	
+	
+	public void updateView(List<AbstractBoardingCard> newCardSet) {
+		mDataSet = newCardSet;
+		this.notifyDataSetChanged();
+	}
+	
 	@Override
 	public int getViewTypeCount() {
 		//return super.getViewTypeCount();

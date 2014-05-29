@@ -1,6 +1,7 @@
 package com.gimpel.journeytest.fragments;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import android.os.Bundle;
@@ -8,11 +9,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.gimpel.journeytest.R;
-import com.gimpel.journeytest.R.id;
-import com.gimpel.journeytest.R.layout;
 import com.gimpel.journeytest.adapters.BoardingCardAdapter;
 import com.gimpel.journeytest.boardingcards.AbstractBoardingCard;
 import com.gimpel.journeytest.boardingcards.AirplaneBoardingCard;
@@ -35,12 +35,62 @@ public class JourneyListFragment extends Fragment {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-
+		
 		mBoardingCards = getBoardingCards();
 		mAdapter = new BoardingCardAdapter(getActivity(), mBoardingCards);
 		
         mListView = (ListView) view.findViewById(R.id.listview);
         mListView.setAdapter(mAdapter);
+        
+        Button b = (Button) view.findViewById(R.id.sortListButton);
+        b.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				sort();
+			}
+		});
+	}
+
+	/**
+	 * Sorts data asociated with listview in a way described in task.
+	 * This method works only for correnct data.
+	 * Uses 3 loops, none of them nested so complexity is linear O(3n) ~ O(n)  
+	 */
+	private void sort() {
+		// create mapping between destination/start location and BoardingCard 
+		HashMap<String, AbstractBoardingCard> getCardByDestination =
+				new HashMap<String, AbstractBoardingCard>();
+		HashMap<String, AbstractBoardingCard> getCardByBegining =
+				new HashMap<String, AbstractBoardingCard>();
+
+		// first loop: just fill the data
+		for (AbstractBoardingCard card : mBoardingCards) {
+			getCardByBegining.put(card.getBeginning(), card);
+			getCardByDestination.put(card.getDestination(), card);
+		}
+		
+		List<AbstractBoardingCard> sortedList = new ArrayList<AbstractBoardingCard>();
+		AbstractBoardingCard currentItem = null;
+		
+		// second loop (not always goes all way round)
+		// lets find first location
+		for (AbstractBoardingCard card : mBoardingCards) {
+			// first item
+			if (!getCardByDestination.keySet().contains(card.getBeginning())) {
+				currentItem = card;
+				break;
+			}
+		}
+		
+		// last loop - finds next location and adds it to sorted list
+		// in a while loop.
+		do {
+			sortedList.add(currentItem);
+			currentItem = getCardByBegining.get(currentItem.getDestination());
+		} while ( currentItem != null);
+		
+		mAdapter.updateView(sortedList);
 	}
 	
 	public List<AbstractBoardingCard> getBoardingCards() {
@@ -73,10 +123,11 @@ public class JourneyListFragment extends Fragment {
 		airplane2.setSeatNumber("7B");
 		airplane2.setBaggageDrop("Automatically transfered");
 		
-		cardList.add(train1);
-		cardList.add(airportBus);
+		// wrong order
 		cardList.add(airplane);
+		cardList.add(train1);
 		cardList.add(airplane2);
+		cardList.add(airportBus);
 		
 		return cardList;
 	}
