@@ -1,4 +1,4 @@
-![Screenshot](https://github.com/FilipGimpel/JourneyTest/master/screenshot.png)
+![Screenshot](https://github.com/FilipGimpel/JourneyTest/raw/master/screenshot.png)
 Project uses fragments and custom pullToRefresh view. ListView uses different row view for every mean of transport. It doesn't use viewHolder pattern. Loading view after pullToRefresh is shown extactly for one second, just to improve experience. Sorting algorithm is O(n). Apk file: https://drive.google.com/file/d/0BxEaRHxSUd6_NlZFMFJ3Vk9YQ0U/edit?usp=sharing
 
 Here are commands I used to create/merge and commit branch:
